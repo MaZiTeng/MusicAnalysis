@@ -17,7 +17,7 @@ class ReadDatabase(object):
         self.url = "localhost"
         self.username = "root"
         self.password = ""
-        self.database = "healing"
+        self.database = "healing2018"
 
     def ConnectDB(self):
         db = pymysql.connect(self.url, self.username, self.password, self.database)

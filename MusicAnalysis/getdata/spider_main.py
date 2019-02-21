@@ -17,7 +17,7 @@ class SpiderMain(object):
 
     def craw(self):
 
-        for i in range(1, 30000):
+        for i in range(1, 10):
             # 从数据库中获取第i歌曲名
             music_name = self.urls.get_name(i)
             print("\n正在处理第 %s 条数据，%s" % (i, music_name))
@@ -29,14 +29,14 @@ class SpiderMain(object):
             ex, wid = self.check.check_in(music_name)
             if ex is 0:
                 # 判断它是否是歌曲
-                judge = self.hot.judge_music(music_name)
+                judge, hot_baidu = self.hot.judge_music(music_name)
                 if judge is 0:
                     continue
                 # 在新数据库中创建这条记录
                 wid = self.create.create_records(music_name)
                 # 获取热度
-                hot = self.hot.hot_do(music_name, wid)
-                print("插入数据：", wid, music_name, hot)
+                hot1, hot2, hot3, hot4 = self.hot.hot_do(music_name, wid, hot_baidu)
+                print("插入数据：", wid, music_name, hot1, hot_baidu, hot2, hot3, hot4)
 
             else:
                 # 更新数据库bigdata

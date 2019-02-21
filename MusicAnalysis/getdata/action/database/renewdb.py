@@ -23,13 +23,14 @@ class RenewDatabase(object):
         db = pymysql.connect(self.url, self.username, self.password, self.database)
         return db
 
-    def renew_songs(self, wid, hot):
+    def renew_songs(self, wid, hot1, hot_baidu, hot2, hot3, hot4):
         if wid is None:
             return None
         db = self.ConnectDB()
         cursor = db.cursor()
         # SQL 更新语句
-        sql = "UPDATE `songs` SET `hot` = '%s' WHERE `songs`.`id` = %s" % (hot, wid)
+        sql = "UPDATE `songs` SET `hot_qianqian` = '%s', `hot_baidu` = '%s', `hot_163` = '%s', `hot_xiami` = '%s'," \
+              " `hot_kuwo` = '%s' WHERE `songs`.`id` = %s" % (hot1, hot_baidu, hot2, hot3, hot4, wid)
         try:
             # 执行SQL语句
             cursor.execute(sql)
@@ -55,13 +56,13 @@ class RenewDatabase(object):
             cursor.execute(sql_get)
             # 获取记录
             results = cursor.fetchone()
-            count = results[3]
+            count = results[2]
         except:
             print("Error: renewdb.renew_count.get error")
 
         count += 1
 
-        sql_updata = "UPDATE `songs` SET `user_count` = '%s' WHERE `songs`.`id` = %s " % (count, wid)
+        sql_updata = "UPDATE `songs` SET `count` = '%s' WHERE `songs`.`id` = %s " % (count, wid)
         try:
             # 执行SQL语句
             cursor.execute(sql_updata)
