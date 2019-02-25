@@ -17,7 +17,7 @@ class SpiderMain(object):
 
     def craw(self):
 
-        for i in range(1, 10):
+        for i in range(17658, 20000):
             # 从数据库中获取第i歌曲名
             music_name = self.urls.get_name(i)
             print("\n正在处理第 %s 条数据，%s" % (i, music_name))

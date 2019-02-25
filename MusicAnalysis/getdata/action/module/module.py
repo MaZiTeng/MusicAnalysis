@@ -12,6 +12,7 @@
 import urllib.parse
 import re
 import urllib.request
+from retry import retry
 
 
 
@@ -36,6 +37,7 @@ class Module(object):
         return music_name
 
     # 下载url
+    # @retry(ZeroDivisionError, tries=3, delay=2)
     def download(self, url):
         if url is None:
             return None
